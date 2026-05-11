@@ -4,7 +4,27 @@ const GithubIcon = ({ size = 16 }) => (
   </svg>
 );
 
+const ExternalLinkIcon = ({ size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" y1="14" x2="21" y2="3" />
+  </svg>
+);
+
 const PROJECTS = [
+  {
+    title: 'PlexAscend',
+    period: 'Jan 2026 – Present',
+    stack: ['Next.js', 'Python', 'Flask', 'OpenAI API', 'MongoDB'],
+    bullets: [
+      'AI-powered nutrition tracking platform with photo-based meal recognition — snap a photo and get instant macro breakdowns',
+      'GPT-integrated coaching system provides personalized feedback and motivation based on user progress and goals',
+      'Full-stack app with a Next.js frontend, Python/Flask API, and MongoDB for user data and meal history',
+    ],
+    link: 'https://plexascend.com',
+    github: 'https://github.com/joliniscool',
+  },
   {
     title: 'Campus WiFi Monitor',
     period: 'Jan 2026 – Present',
@@ -46,6 +66,17 @@ const Projects = () => {
                 <h3 className="text-xl font-bold text-slate-100">{p.title}</h3>
                 <div className="flex items-center gap-4 shrink-0 mt-0.5">
                   <span className="font-mono text-xs text-slate-600">{p.period}</span>
+                  {p.link && (
+                    <a
+                      href={p.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-600 hover:text-pink-400 transition-colors"
+                      aria-label="Live site"
+                    >
+                      <ExternalLinkIcon size={16} />
+                    </a>
+                  )}
                   <a
                     href={p.github}
                     target="_blank"
