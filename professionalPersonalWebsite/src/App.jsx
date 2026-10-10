@@ -7,6 +7,7 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
+import Model3D from './components/Model3D';
 import './index.css';
 
 function App() {
@@ -47,6 +48,11 @@ function App() {
           mainVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
+        {/* Fixed 3D model — visible on large screens, floats right side throughout scroll */}
+        <div className="hidden xl:block fixed right-0 top-0 w-[480px] h-screen z-0 pointer-events-none">
+          <Model3D />
+        </div>
+
         <Navbar />
         <Hero />
         <About />

@@ -60,7 +60,7 @@ const Hero = () => {
     <section id="home" className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-16 overflow-hidden">
       <NetworkBackground />
 
-      <div className="relative z-10 max-w-4xl">
+      <div className="relative z-10 max-w-2xl">
         <p className="font-mono text-pink-400 text-sm tracking-widest mb-6">hi, i'm</p>
 
         <h1 className="text-6xl md:text-8xl font-black text-slate-100 leading-none mb-5 tracking-tight">
