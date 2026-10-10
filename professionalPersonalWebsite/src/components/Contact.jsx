@@ -124,7 +124,7 @@ const Contact = () => {
         </div>
 
         <div className="mt-24 pt-8 border-t border-white/[0.05] text-center">
-          <p className="font-mono text-xs text-slate-700">designed & built by jolin wang · 2025</p>
+          <p className="font-mono text-xs text-slate-700">designed & built by jolin wang · 2026</p>
         </div>
       </div>
     </section>

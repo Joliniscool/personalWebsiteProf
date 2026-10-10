@@ -14,13 +14,13 @@ const ExternalLinkIcon = ({ size = 16 }) => (
 
 const PROJECTS = [
   {
-    title: 'PlexAscend',
-    period: 'Jan 2026 – Present',
-    stack: ['Next.js', 'Python', 'Flask', 'OpenAI API', 'MongoDB'],
+    title: 'Ascend.AI',
+    period: 'Feb 2026 – Jun 2026',
+    stack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'AWS', 'Anthropic API'],
     bullets: [
-      'AI-powered nutrition tracking platform with photo-based meal recognition — snap a photo and get instant macro breakdowns',
-      'GPT-integrated coaching system provides personalized feedback and motivation based on user progress and goals',
-      'Full-stack app with a Next.js frontend, Python/Flask API, and MongoDB for user data and meal history',
+      'Full-stack AI-powered nutrition platform built with React, Node.js/Express, and JSON REST APIs, deployed on AWS',
+      'AI chatbot powered by the Anthropic API delivers personalized coaching, used daily by 50+ club members',
+      'MongoDB schema structures and persists user profile, meal-log, and macro-tracking data',
     ],
     link: 'https://plexascend.com',
     github: 'https://github.com/joliniscool',
@@ -30,9 +30,9 @@ const PROJECTS = [
     period: 'Jan 2026 – Present',
     stack: ['React', 'Express.js', 'Material UI', 'Leaflet.js', 'SQLite'],
     bullets: [
-      'WiFi monitoring dashboard for UC Berkeley — users submit, store, and visualize real-time signal strength data across campus',
-      'Interactive campus map built with Leaflet.js displaying live WiFi readings by location',
-      'SQLite backend via an Express.js REST API handles all data ingestion and retrieval',
+      'WiFi monitoring dashboard that lets users submit, store, and visualize real-time signal strength data',
+      'Interactive campus map built with Leaflet.js showing live WiFi strength across 5 buildings',
+      'Signal submissions stored in SQLite and served through an Express.js backend API',
     ],
     github: 'https://github.com/joliniscool',
   },

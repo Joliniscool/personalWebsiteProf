@@ -52,8 +52,39 @@ const useTyping = () => {
   return displayed;
 };
 
+const NAME = 'Jolin Wang';
+const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>/\\[]{}#$%&*+=';
+
+// Decodes the name from random glyphs, left to right
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const useScramble = (text) => {
+  const [chars, setChars] = useState(() => {
+    const done = prefersReducedMotion();
+    return text.split('').map((c) => ({ c, done }));
+  });
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    let frame = 0;
+    const id = setInterval(() => {
+      frame += 1;
+      const revealed = Math.floor(frame / 3);
+      setChars(text.split('').map((c, i) => {
+        if (i < revealed || c === ' ') return { c, done: true };
+        return { c: GLYPHS[Math.floor(Math.random() * GLYPHS.length)], done: false };
+      }));
+      if (revealed >= text.length) clearInterval(id);
+    }, 45);
+    return () => clearInterval(id);
+  }, [text]);
+
+  return chars;
+};
+
 const Hero = () => {
   const typedRole = useTyping();
+  const nameChars = useScramble(NAME);
   const scroll = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
@@ -63,8 +94,10 @@ const Hero = () => {
       <div className="relative z-10 max-w-2xl">
         <p className="font-mono text-pink-400 text-sm tracking-widest mb-6">hi, i'm</p>
 
-        <h1 className="text-6xl md:text-8xl font-black text-slate-100 leading-none mb-5 tracking-tight">
-          Jolin Wang
+        <h1 className="hero-name text-5xl sm:text-6xl md:text-7xl font-black leading-none mb-5" aria-label={NAME}>
+          {nameChars.map(({ c, done }, i) => (
+            <span key={i} aria-hidden="true" className={done ? undefined : 'scrambling'}>{c}</span>
+          ))}
         </h1>
 
         <p className="text-xl md:text-2xl text-slate-400 font-light mb-3">
@@ -77,9 +110,9 @@ const Hero = () => {
         </p>
 
         <p className="text-slate-300 text-lg leading-relaxed max-w-xl mb-12">
-          I study industrial engineering and computer science, work on AI evaluation research
-          at ACE Labs, and build things on the side. Currently most interested in data systems,
-          optimization, and full-stack development.
+          I study industrial engineering and computer science, fine-tune LLMs at ACE Labs,
+          teach Python in CS10, and build AI-powered products — most recently an Anthropic-powered
+          chatbot at BuildBee. Most interested in AI systems, optimization, and full-stack development.
         </p>
 
         <div className="flex flex-wrap items-center gap-6 mb-20">

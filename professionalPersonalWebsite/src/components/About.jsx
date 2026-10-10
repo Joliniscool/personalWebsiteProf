@@ -1,12 +1,20 @@
 const COURSEWORK = [
+  'Computer Architecture',
+  'Structure & Interpretation of Computer Programs',
   'Data Structures',
-  'Linear Programming',
-  'SICP',
   'Optimization Modeling',
-  'Linear Algebra & ODEs',
-  'Signal & Info Processing',
-  'Business Statistics',
+  'Linear Programming',
   'Discrete Math & Probability',
+  'Business Statistics',
+  'Signal & Info Processing',
+  'Linear Algebra & ODEs',
+];
+
+const ACTIVITIES = [
+  'PlexTech',
+  'Society of Women Engineers',
+  'GBO Orientation Leader',
+  'Institute of Industrial & Systems Engineers',
 ];
 
 // To add an image: replace the placeholder div with:
@@ -40,14 +48,16 @@ const About = () => {
               accidental — I'm drawn to problems where optimization meets software.
             </p>
             <p>
-              Right now I'm a research assistant at ACE Labs evaluating LLM outputs for
-              Berkeley CS courses, and a systems analyst at IISE building data pipelines
-              that replace manual workflows.
+              This summer I built an AI chatbot with the Anthropic API at BuildBee. Right now
+              I'm fine-tuning LLMs for ER triage at ACE Labs, building a research website for
+              an archaeology professor through URAP, building data pipelines at IISE, and
+              teaching Python as a CS10 intern.
             </p>
             <p>
               I'm interested in building — software, tools, products, and things that don't
-              fit neatly into one category. Outside of CS I do art, and I think the two
-              inform each other more than people expect.
+              fit neatly into one category. Outside of CS I do art and editing, play tennis,
+              pickleball, and spikeball, and I'm always down for the beach, an escape room,
+              or a round of Identity V.
             </p>
           </div>
 
@@ -66,6 +76,13 @@ const About = () => {
             <p className="text-slate-400 text-sm mt-1">BS Industrial Engineering & Operations Research</p>
             <p className="text-slate-400 text-sm">BS Electrical Engineering & Computer Science</p>
             <p className="text-slate-600 text-sm mt-3 font-mono">Expected May 2028</p>
+
+            <p className="font-mono text-pink-400 text-xs tracking-wider mt-6 mb-3">activities</p>
+            <ul className="space-y-1">
+              {ACTIVITIES.map((a) => (
+                <li key={a} className="text-slate-400 text-sm">{a}</li>
+              ))}
+            </ul>
           </div>
 
           <div className="bg-white/[0.03] border border-white/[0.07] rounded-xl p-6">

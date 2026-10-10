@@ -1,8 +1,8 @@
 const SKILLS = {
-  Languages: ['Python', 'JavaScript', 'SQL', 'Java', 'HTML/CSS', 'SwiftUI', 'Pyomo', 'AMPL'],
-  Frameworks: ['React', 'Node.js', 'Flask', 'FastAPI', 'Material-UI', 'JUnit', 'WordPress'],
-  Tools: ['GitHub', 'Google Cloud Platform', 'VS Code', 'IntelliJ', 'Visual Studio', 'DataHub'],
-  Libraries: ['pandas', 'NumPy', 'Matplotlib'],
+  Languages: ['Python', 'JavaScript', 'TypeScript', 'Java', 'HTML/CSS', 'Swift', 'C', 'RISC-V'],
+  'Frameworks & Platforms': ['React', 'Next.js', 'Node.js', 'Express.js', 'Flask', 'MongoDB', 'SQLite', 'REST APIs', 'SwiftUI/iOS'],
+  'Data & ML': ['SQL (PostgreSQL)', 'Machine Learning', 'pandas', 'NumPy', 'Matplotlib', 'Excel', 'Pyomo', 'AMPL'],
+  'Tools & Practices': ['Docker', 'GCP', 'Git/GitHub', 'Agile/Scrum'],
 };
 
 const Skills = () => {

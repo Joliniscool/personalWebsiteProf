@@ -8,6 +8,7 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Model3D from './components/Model3D';
+import ChatBot from './components/ChatBot';
 import './index.css';
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
         <Skills />
         <Contact />
       </div>
+      {mainVisible && <ChatBot />}
     </>
   );
 }

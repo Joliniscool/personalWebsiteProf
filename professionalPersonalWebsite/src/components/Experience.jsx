@@ -1,32 +1,67 @@
 const EXPERIENCE = [
   {
+    title: 'Software Engineer Intern',
+    org: 'BuildBee',
+    location: 'Berkeley, CA',
+    period: 'May 2026 – Aug 2026',
+    bullets: [
+      'Built an AI-powered chatbot using the Anthropic API and Node.js, cutting average response time by 60% for field teams',
+      'Integrated the chatbot with internal project databases, enabling instant data retrieval across 15+ active construction sites',
+      'Designed AI integrations closely with the engineering and QA team, improving data accessibility for 20+ field and office staff',
+    ],
+  },
+  {
+    title: 'Undergraduate Research Apprentice',
+    org: 'Undergraduate Research Apprentice Program (URAP)',
+    location: 'Berkeley, CA',
+    period: 'Aug 2026 – Present',
+    bullets: [
+      "Designed and built a website using React and Node.js/Flask to showcase an archaeology professor's research findings and publications",
+      'Collaborated directly with faculty to translate academic research into an accessible, public-facing web platform',
+    ],
+  },
+  {
     title: 'Undergraduate Research Assistant',
     org: 'UC Berkeley ACE Labs',
     location: 'Berkeley, CA',
     period: 'Feb 2026 – Present',
     bullets: [
-      'Evaluated 10+ LLM outputs for correctness, reasoning quality, and alignment with course objectives across Berkeley CS/EECS curricula',
-      'Participated in weekly research meetings to evaluate and discuss newly developed AI chatbot systems for Berkeley CS/EECS courses',
+      'Curated a 500+ case dataset and fine-tuned an LLM in Python to detect the necessity of MRI/CT scans in ER triage',
+      'Evaluated 10+ LLM outputs weekly for correctness, reasoning quality, and alignment with Berkeley CS course objectives',
+      'Discussed newly developed AI chatbot systems weekly with an 8-person research team supporting Berkeley CS/EECS courses',
     ],
   },
   {
-    title: 'Systems Analyst',
+    title: 'Process & Data Analyst',
     org: 'Institute of Industrial and Systems Engineering',
     location: 'Berkeley, CA',
     period: 'Aug 2025 – Present',
     bullets: [
-      'Designed structured data workflows to replace manual processes for a real estate brokerage (AZ Elite Brokers), reducing processing time by 40%',
-      'Built a centralized recruiting pipeline system tracking 100+ candidates, improving efficiency by 35%',
+      'Redesigned a manual client-processing workflow into a structured SQL-based system, cutting processing time by 10+ hours weekly',
+      'Automated a manual data pipeline with custom Python scripts, reducing operations turnaround time by 40%',
+      'Built and maintained a SQL-based pipeline tracking 100+ candidates end-to-end, improving throughput efficiency by 35%',
     ],
   },
   {
-    title: 'Operations Intern',
+    title: 'Software Engineering & Data Operations Intern',
     org: 'EditPK',
     location: 'Irvine, CA',
     period: 'May 2024 – Aug 2025',
     bullets: [
-      'Managed a backend database of 200+ clients and manuscripts, ensuring data accuracy and operational continuity for non-native English speakers in publishing',
-      'Recruited and led a 5-person freelance editing team, reducing revision cycles by 25% through structured workflow and quality control',
+      'Managed a PostgreSQL backend database of 200+ clients and manuscripts, ensuring data accuracy and continuity',
+      "Maintained EditPK's React frontend and contributed to a new site build for parent company Elxigen",
+      'Recruited and led a 5-person freelance editing team, reducing revision cycles by 25% through structured workflow',
+    ],
+  },
+  {
+    title: 'Teaching Intern',
+    org: 'UC Berkeley – CS10: The Beauty and Joy of Computing',
+    location: 'Berkeley, CA',
+    period: 'Aug 2026 – Present',
+    bullets: [
+      'Hold 3–4 hours of weekly office hours, supporting 50+ students via the OH queue with Python and coding debugging',
+      'Lead 3+ lab sections weekly, guiding students through hands-on programming exercises to reinforce core CS concepts',
+      'Help students build foundational Python and computational thinking skills through 1-on-1 instruction',
     ],
   },
 ];
