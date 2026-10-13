@@ -1,7 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { X, Send } from 'lucide-react';
+import JolinAvatar from './JolinAvatar';
+import Quest from './Quest';
+import { localAnswer, OFFLINE_REPLY } from './jolinFaq';
 
 const GREETING = "hi! i'm AI jolin — ask me about my projects, research, classes, or what i do for fun ✨";
+
+// Cap real API calls per visit; after that, offline answers only
+const MAX_AI_CALLS = 15;
 
 const SUGGESTIONS = [
   'What are you working on right now?',
@@ -9,40 +15,13 @@ const SUGGESTIONS = [
   'What do you do for fun?',
 ];
 
-// Cartoon girl with a black ponytail
-export const JolinAvatar = ({ size = 40, sway = false }) => (
-  <svg width={size} height={size} viewBox="0 0 64 64" className="rounded-full" aria-hidden="true">
-    <circle cx="32" cy="32" r="32" fill="#2a1630" />
-    {/* ponytail */}
-    <g className={sway ? 'ponytail-sway' : undefined} style={{ transformOrigin: '46px 20px' }}>
-      <path d="M44 16 C58 14 60 30 54 40 C51 45 47 44 49 38 C52 30 50 24 44 22 Z" fill="#111" />
-      <circle cx="45" cy="18" r="3.2" fill="#ec4899" />
-    </g>
-    {/* neck + shirt */}
-    <rect x="28" y="44" width="8" height="8" fill="#f6d2b8" />
-    <path d="M14 64 C16 52 24 49 32 49 C40 49 48 52 50 64 Z" fill="#ec4899" />
-    {/* face */}
-    <ellipse cx="32" cy="32" rx="14" ry="15" fill="#fde2cf" />
-    {/* hair: top + bangs */}
-    <path d="M17 32 C15 18 24 11 33 11 C42 11 49 17 47 30 C44 23 40 20 36 19 C33 23 25 25 19 26 C18 28 17 30 17 32 Z" fill="#111" />
-    {/* eyes */}
-    <ellipse cx="26" cy="33" rx="2" ry="2.6" fill="#1f1f1f" />
-    <ellipse cx="38" cy="33" rx="2" ry="2.6" fill="#1f1f1f" />
-    <circle cx="26.7" cy="32.1" r="0.7" fill="#fff" />
-    <circle cx="38.7" cy="32.1" r="0.7" fill="#fff" />
-    {/* blush + smile */}
-    <ellipse cx="22.5" cy="38" rx="2.6" ry="1.5" fill="#f9a8d4" opacity="0.8" />
-    <ellipse cx="41.5" cy="38" rx="2.6" ry="1.5" fill="#f9a8d4" opacity="0.8" />
-    <path d="M28.5 39.5 Q32 43 35.5 39.5" stroke="#b4235f" strokeWidth="1.6" fill="none" strokeLinecap="round" />
-  </svg>
-);
-
 const ChatBot = () => {
   const [open, setOpen] = useState(false);
+  const [tab, setTab] = useState('quest');
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const aiCalls = useRef(0);
   const endRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -51,8 +30,8 @@ const ChatBot = () => {
   }, [messages, loading, open]);
 
   useEffect(() => {
-    if (open) inputRef.current?.focus();
-  }, [open]);
+    if (open && tab === 'chat') inputRef.current?.focus();
+  }, [open, tab]);
 
   const send = async (text) => {
     const content = text.trim();
@@ -60,8 +39,17 @@ const ChatBot = () => {
     const next = [...messages, { role: 'user', content }];
     setMessages(next);
     setInput('');
-    setError('');
+    const reply = (text) => setMessages([...next, { role: 'assistant', content: text }]);
+
+    // Common questions are answered instantly, no API tokens needed
+    const quick = localAnswer(content, { quick: true });
+    if (quick || aiCalls.current >= MAX_AI_CALLS) {
+      reply(quick || localAnswer(content) || OFFLINE_REPLY);
+      return;
+    }
+
     setLoading(true);
+    aiCalls.current += 1;
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
@@ -69,10 +57,11 @@ const ChatBot = () => {
         body: JSON.stringify({ messages: next }),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || 'Something went wrong. Try again?');
-      setMessages([...next, { role: 'assistant', content: data.reply }]);
-    } catch (e) {
-      setError(e.message || 'Something went wrong. Try again?');
+      if (!res.ok || !data.reply) throw new Error(data.error);
+      reply(data.reply);
+    } catch {
+      // API down, out of credits, or rate limited: fall back to offline answers
+      reply(localAnswer(content) || OFFLINE_REPLY);
     } finally {
       setLoading(false);
     }
@@ -87,7 +76,24 @@ const ChatBot = () => {
             <JolinAvatar size={36} sway />
             <div className="flex-1 min-w-0">
               <p className="text-slate-100 text-sm font-semibold">AI Jolin</p>
-              <p className="font-mono text-[11px] text-pink-400/80">an AI version of me · may make mistakes</p>
+              <p className="font-mono text-[11px] text-pink-400/80">
+                {tab === 'quest' ? 'your guide to this site' : 'an AI version of me · may make mistakes'}
+              </p>
+            </div>
+            <div className="flex rounded-full border border-white/[0.08] p-0.5 font-mono text-[11px]" role="tablist">
+              {['quest', 'chat'].map((t) => (
+                <button
+                  key={t}
+                  role="tab"
+                  aria-selected={tab === t}
+                  onClick={() => setTab(t)}
+                  className={`px-2.5 py-1 rounded-full transition-colors ${
+                    tab === t ? 'bg-pink-500/20 text-pink-200' : 'text-slate-500 hover:text-slate-300'
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
             </div>
             <button
               onClick={() => setOpen(false)}
@@ -98,6 +104,9 @@ const ChatBot = () => {
             </button>
           </div>
 
+          {tab === 'quest' && <Quest onAskJolin={() => setTab('chat')} />}
+
+          {tab === 'chat' && <>
           {/* messages */}
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3" aria-live="polite">
             <Bubble role="assistant" content={GREETING} />
@@ -131,7 +140,6 @@ const ChatBot = () => {
               </div>
             )}
 
-            {error && <p className="text-xs text-rose-400 pl-9">{error}</p>}
             <div ref={endRef} />
           </div>
 
@@ -157,6 +165,7 @@ const ChatBot = () => {
               <Send size={16} />
             </button>
           </form>
+          </>}
         </div>
       )}
 
@@ -168,7 +177,7 @@ const ChatBot = () => {
       >
         <JolinAvatar size={44} sway />
         <span className="font-mono text-xs text-pink-300 group-hover:text-pink-200">
-          {open ? 'close' : 'chat with me'}
+          {open ? 'close' : 'explore with me'}
         </span>
       </button>
     </div>

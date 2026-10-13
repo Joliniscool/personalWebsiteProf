@@ -7,6 +7,7 @@ Needs the ANTHROPIC_API_KEY environment variable (set it in Vercel project setti
 """
 
 import json
+import os
 from http.server import BaseHTTPRequestHandler
 
 import anthropic
@@ -142,6 +143,9 @@ class handler(BaseHTTPRequestHandler):
         except json.JSONDecodeError:
             return self._send(400, {"error": "Invalid JSON"})
 
+        if not os.environ.get("ANTHROPIC_API_KEY"):
+            return self._send(503, {"error": "Chat isn't set up yet. Email me at jolinwang@berkeley.edu!"})
+
         messages = clean_messages(data.get("messages") if isinstance(data, dict) else None)
         if messages is None:
             return self._send(400, {"error": "Invalid messages"})
@@ -152,7 +156,7 @@ class handler(BaseHTTPRequestHandler):
             return self._send(429, {"error": "I'm getting a lot of messages right now. Try again in a minute!"})
         except anthropic.AuthenticationError:
             return self._send(500, {"error": "Chat isn't configured yet."})
-        except (anthropic.APIStatusError, anthropic.APIConnectionError):
+        except anthropic.AnthropicError:
             return self._send(502, {"error": "Couldn't reach my brain just now. Try again?"})
 
     def do_GET(self):

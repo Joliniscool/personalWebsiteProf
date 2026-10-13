@@ -414,3 +414,26 @@ section[id] {
 @media (prefers-reduced-motion: reduce) {
   .ponytail-sway, .chat-panel, .typing-dot { animation: none; }
 }
+
+/* ===================== QUEST ===================== */
+
+.quest-target {
+  animation: questPing 1.8s ease-out;
+}
+
+@keyframes questPing {
+  0% { box-shadow: inset 0 0 0 2px rgba(236, 72, 153, 0.7); }
+  100% { box-shadow: inset 0 0 0 2px rgba(236, 72, 153, 0); }
+}
+
+.quest-cursor {
+  animation: questBlink 1s steps(1) infinite;
+}
+
+@keyframes questBlink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quest-target, .quest-cursor { animation: none; }
+}
