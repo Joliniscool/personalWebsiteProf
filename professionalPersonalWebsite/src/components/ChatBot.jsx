@@ -104,7 +104,7 @@ const ChatBot = () => {
             </button>
           </div>
 
-          {tab === 'quest' && <Quest onAskJolin={() => setTab('chat')} />}
+          {tab === 'quest' && <Quest onAskJolin={(q) => { setTab('chat'); if (q) send(q); }} />}
 
           {tab === 'chat' && <>
           {/* messages */}

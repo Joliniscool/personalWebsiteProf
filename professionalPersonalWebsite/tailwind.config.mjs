@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Space Mono"', '"Courier New"', 'monospace'],
+        mono: ['"Space Mono"', '"Courier New"', 'monospace'],
+      },
       colors: {
         pink: {
           50: '#fdf2f8',

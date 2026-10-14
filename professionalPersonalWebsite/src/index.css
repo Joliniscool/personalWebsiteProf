@@ -78,7 +78,7 @@
 .splash-float {
   position: absolute;
   bottom: -40px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Space Mono', 'Courier New', monospace;
   font-size: 11px;
   color: rgba(236, 72, 153, 0.1);
   user-select: none;
@@ -107,7 +107,7 @@
 
 /* Big name */
 .splash-name {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Space Mono', 'Courier New', monospace;
   font-size: clamp(2rem, 6vw, 3.2rem);
   font-weight: 900;
   letter-spacing: 0.15em;
@@ -133,7 +133,7 @@
 }
 
 .splash-subtitle {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Space Mono', 'Courier New', monospace;
   font-size: 11px;
   letter-spacing: 0.35em;
   color: rgba(255, 255, 255, 0.28);
@@ -180,7 +180,7 @@
 
 .terminal-title {
   margin-left: 8px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Space Mono', 'Courier New', monospace;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.28);
   letter-spacing: 0.3px;
@@ -188,7 +188,7 @@
 
 .terminal-body {
   padding: 22px 26px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Space Mono', 'Courier New', monospace;
   font-size: 14px;
   line-height: 2;
   min-height: 160px;
@@ -248,7 +248,7 @@
   background: transparent;
   border: 1.5px solid #ec4899;
   color: #ec4899;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Space Mono', 'Courier New', monospace;
   font-size: 13px;
   letter-spacing: 3px;
   cursor: pointer;
@@ -316,9 +316,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Space Mono', 'Courier New', monospace;
   background-color: #080c18;
 }
 
